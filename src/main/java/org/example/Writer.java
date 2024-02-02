@@ -1,6 +1,5 @@
 package org.example;
 
-import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
@@ -33,9 +32,9 @@ public class Writer {
 
     public void setResultsPath(String resultsPath) {
         try {
-            FileWriter fw = new FileWriter(resultsPath+prefix+"test.txt");
-        }catch (IOException e){
-            System.out.println(e.getMessage());
+            FileWriter fw = new FileWriter(resultsPath + "\\path_check.txt");
+        } catch (IOException e) {
+            System.out.println("Путь параметра -о не проходит проверку: " + e.getMessage());
         }
         this.resultsPath = resultsPath;
 
