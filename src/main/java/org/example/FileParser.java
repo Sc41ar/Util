@@ -16,9 +16,9 @@ public class FileParser {
         if (originalSt.isBlank())
             return "Blank";
         try {
-            var intgr = Integer.parseInt(originalSt);
+            Integer.parseInt(originalSt);
             statRecorder.incrementIntegerCount();
-            fileWriter.integerList.add(intgr);
+            fileWriter.integerList.add(originalSt);
             return "Int";
         } catch (NumberFormatException e) {
             System.out.println("Не целое");
@@ -27,14 +27,15 @@ public class FileParser {
             var dotsStr = originalSt.substring(0).replace(',', '.'); //Исключение проблем с локалью
             //для сохранения корректности исходной строки делаем сохраняем это в другую строку
             //TODO дабл чек целесообразности этого потом
-            var dbl = Double.parseDouble(dotsStr);
+            Double.parseDouble(dotsStr);
             statRecorder.incrementFloatCount();
-            fileWriter.doubleList.add(dbl);
+            fileWriter.doubleList.add(dotsStr);
             return "Float";
         } catch (NumberFormatException e) {
             System.out.println("Не с плавающей");
         }
         statRecorder.incrementStringCount();
+        fileWriter.stringList.add(originalSt);
         return "String";
 
     }
