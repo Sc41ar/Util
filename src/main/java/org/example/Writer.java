@@ -1,5 +1,6 @@
 package org.example;
 
+import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.LinkedList;
@@ -44,9 +45,15 @@ public class Writer {
         return resultsPath;
     }
 
-    public void setResultsPath(String resultsPath) {
+    public void setResultsPath(String resultsPath) {//проверка корректности заданного пути вывода
+        //Если нельзя по данному пути создать файл - путь неккоректный
         try {
-            FileWriter fw = new FileWriter(resultsPath + "\\path_check.txt");
+            String checkFilePath = resultsPath + "\\path_check.txt";
+            FileWriter fw = new FileWriter(checkFilePath);
+            fw.close();
+            File file = new File(checkFilePath);
+            if (file.exists())
+                file.delete();
         } catch (IOException e) {
             System.out.println("Путь параметра -о не проходит проверку: " + e.getMessage());
         }
