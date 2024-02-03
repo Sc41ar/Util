@@ -12,19 +12,6 @@ public class StatRecorder {
         this.writer = writer;
     }
 
-
-    //? TODO
-    /*public void addIntegerCount(int count) {
-        integerCount += count;
-    }
-
-    public void addFloatCount(int count) {
-        floatCount += count;
-    }
-
-    public void addStringCount(int count) {
-        stringCount += count;
-    }*/
     public void incrementIntegerCount() {
         integerCount++;
     }
@@ -41,28 +28,12 @@ public class StatRecorder {
         return stringCount;
     }
 
-    public void setStringCount(int stringCount) {
-        this.stringCount = stringCount;
-    }
-
     public int getIntegerCount() {
         return integerCount;
     }
 
-    public void setIntegerCount(int integerCount) {
-        this.integerCount = integerCount;
-    }
-
     public int getFloatCount() {
         return floatCount;
-    }
-
-    public void setFloatCount(int floatCount) {
-        this.floatCount = floatCount;
-    }
-
-    public boolean isBriefStatOutput() {
-        return briefStatOutput;
     }
 
     public void setBriefStatOutput(boolean briefStatOutput) {
@@ -138,11 +109,11 @@ public class StatRecorder {
 
     private void intFullOut() {
         var intList = writer.integerList;
-        var integerArray = intList.stream().mapToInt(Long::intValue).sorted().toArray();
-        var intSum = intList.stream().mapToLong(Long::intValue).sum();   // List -> Stream -> LongStream(по значению) тут уже метод суммы есть в 21
-        var intMinOptional = intList.stream().min(Long::compareTo); //возвращаемы тип Optinal >> его надо проверить на isPresent  получить значение
+                var integerArray = intList.stream().mapToLong(Long::longValue).sorted().toArray();
+        var intSum = intList.stream().mapToLong(Long::longValue).sum(); // List -> Stream -> LongStream(по значению) тут уже метод суммы есть в 21
+        var intMinOptional = intList.stream().min(Long::compareTo); //возвращаемы тип Optional >> его надо проверить на isPresent  получить значение
         var intMaxOptional = intList.stream().max(Long::compareTo); //
-        int intMedian;
+        long intMedian;
         if (intList.size() % 2 == 0)
             intMedian = (integerArray[integerCount / 2]
                     + integerArray[(integerCount / 2) - 1]) / 2; // Если четное кол-во целых >> сумма 2 средних/2
