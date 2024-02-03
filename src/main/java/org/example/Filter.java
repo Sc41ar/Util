@@ -20,8 +20,6 @@ public class Filter {
         for(var str: list){
             stringTypeFilter(str);
         }
-        fileWriter.writeFilteredData();
-        statRecorder.statOut();
     }
 
     //double/float, etc -> float

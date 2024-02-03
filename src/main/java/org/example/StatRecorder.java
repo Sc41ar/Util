@@ -41,26 +41,23 @@ public class StatRecorder {
     }
 
     private void briefOut() {
-        System.out.println("\n---------------------------------------------------------\n"
-                + "Количество целых чисел в файлах: "
-                + integerCount
-                + "\n---------------------------------------------------------\n");
+        System.out.println("\n---------------------------------------------------------\n" + "Количество целых чисел в файлах: " + integerCount + "\n---------------------------------------------------------\n");
 
-        System.out.println("\n---------------------------------------------------------\n"
-                + "Количество чисел с плвающей запятой в файлах: "
-                + floatCount
-                + "\n---------------------------------------------------------\n");
+        System.out.println("\n---------------------------------------------------------\n" + "Количество чисел с плвающей запятой в файлах: " + floatCount + "\n---------------------------------------------------------\n");
 
-        System.out.println("\n---------------------------------------------------------\n"
-                + "Количество строковых данных в файлах: "
-                + stringCount
-                + "\n---------------------------------------------------------\n");
+        System.out.println("\n---------------------------------------------------------\n" + "Количество строковых данных в файлах: " + stringCount + "\n---------------------------------------------------------\n");
     }
 
     private void fullOut() {
-        intFullOut();
-        doubleFullOut();
-        StringFullOut();
+        if (integerCount > 0) {
+            intFullOut();
+        }
+        if (floatCount > 0) {
+            doubleFullOut();
+        }
+        if (stringCount > 0) {
+            StringFullOut();
+        }
     }
 
     private void StringFullOut() {
@@ -68,14 +65,7 @@ public class StatRecorder {
         var minLength = writer.stringList.stream().min(String::compareTo);
 
 
-        System.out.println("\n---------------------------------------------------------\n"
-                + "Количество строковых данных в файлах: "
-                + stringCount
-                + "\nНаибольшая длина строки: "
-                + (maxLength.map(string -> string.length() + "\tСтрока: " + string).orElse("Нельзя однозначно определить"))
-                + "\nНаименьшая длина строки: "
-                + (minLength.map(s -> s.length() + "\tСтрока: " + s).orElse("Нельзя однозначно определить"))
-                + "\n---------------------------------------------------------\n");
+        System.out.println("\n---------------------------------------------------------\n" + "Количество строковых данных в файлах: " + stringCount + "\nНаибольшая длина строки: " + (maxLength.map(string -> string.length() + "\tСтрока: " + string).orElse("Нельзя однозначно определить")) + "\nНаименьшая длина строки: " + (minLength.map(s -> s.length() + "\tСтрока: " + s).orElse("Нельзя однозначно определить")) + "\n---------------------------------------------------------\n");
     }
 
     private void doubleFullOut() {
@@ -86,54 +76,26 @@ public class StatRecorder {
         var doubleMaxOptional = doubleList.stream().max(Double::compareTo);
         double doubleMedian;
         if (doubleList.size() % 2 == 0) {
-            doubleMedian = (doubleArray[floatCount / 2]
-                    + doubleArray[(floatCount / 2) - 1]) / 2;
-        } else
-            doubleMedian = doubleArray[floatCount / 2];
+            doubleMedian = (doubleArray[floatCount / 2] + doubleArray[(floatCount / 2) - 1]) / 2;
+        } else doubleMedian = doubleArray[floatCount / 2];
 
-        System.out.println("\n---------------------------------------------------------\n"
-                + "Количество чисел с плавающей запятой в файлах: "
-                + floatCount
-                + "\nМинимальное число с плавающей точки: "
-                + (doubleMinOptional.isPresent() ? doubleMinOptional.get() : "Не найдено")
-                + "\nМаксимальное целое: "
-                + (doubleMaxOptional.isPresent() ? doubleMaxOptional.get() : "Не найдено")
-                + "\nСумма всех целых чисел: "
-                + sum
-                + "\nСреднее значение: "
-                + sum / floatCount     // - не совсем ясно какое среднее требуется ????
-                + "\nМедианное значение: "
-                + doubleMedian
-                + "\n---------------------------------------------------------\n");
+        System.out.println("\n---------------------------------------------------------\n" + "Количество чисел с плавающей запятой в файлах: " + floatCount + "\nМинимальное число с плавающей точки: " + (doubleMinOptional.isPresent() ? doubleMinOptional.get() : "Не найдено") + "\nМаксимальное целое: " + (doubleMaxOptional.isPresent() ? doubleMaxOptional.get() : "Не найдено") + "\nСумма всех целых чисел: " + sum + "\nСреднее значение: " + sum / floatCount     // - не совсем ясно какое среднее требуется ????
+                + "\nМедианное значение: " + doubleMedian + "\n---------------------------------------------------------\n");
     }
 
     private void intFullOut() {
         var intList = writer.integerList;
-                var integerArray = intList.stream().mapToLong(Long::longValue).sorted().toArray();
+        var integerArray = intList.stream().mapToLong(Long::longValue).sorted().toArray();
         var intSum = intList.stream().mapToLong(Long::longValue).sum(); // List -> Stream -> LongStream(по значению) тут уже метод суммы есть в 21
         var intMinOptional = intList.stream().min(Long::compareTo); //возвращаемы тип Optional >> его надо проверить на isPresent  получить значение
         var intMaxOptional = intList.stream().max(Long::compareTo); //
         long intMedian;
         if (intList.size() % 2 == 0)
-            intMedian = (integerArray[integerCount / 2]
-                    + integerArray[(integerCount / 2) - 1]) / 2; // Если четное кол-во целых >> сумма 2 средних/2
-        else
-            intMedian = integerArray[integerCount / 2];
+            intMedian = (integerArray[integerCount / 2] + integerArray[(integerCount / 2) - 1]) / 2; // Если четное кол-во целых >> сумма 2 средних/2
+        else intMedian = integerArray[integerCount / 2];
 
-        System.out.println("\n---------------------------------------------------------\n"
-                + "Количество целых чисел в файлах: "
-                + integerCount
-                + "\nМинимальное целое: "
-                + (intMinOptional.isPresent() ? intMinOptional.get() : "Не найдено")
-                + "\nМаксимальное целое: "
-                + (intMaxOptional.isPresent() ? intMaxOptional.get() : "Не найдено")
-                + "\nСумма всех целых чисел: "
-                + intSum
-                + "\nСреднее значение: "
-                + intSum / integerCount// - не совсем ясно какое среднее требуется ????
-                + "\nМедианное значение: "
-                + intMedian
-                + "\n---------------------------------------------------------\n");
+        System.out.println("\n---------------------------------------------------------\n" + "Количество целых чисел в файлах: " + integerCount + "\nМинимальное целое: " + (intMinOptional.isPresent() ? intMinOptional.get() : "Не найдено") + "\nМаксимальное целое: " + (intMaxOptional.isPresent() ? intMaxOptional.get() : "Не найдено") + "\nСумма всех целых чисел: " + intSum + "\nСреднее значение: " + intSum / integerCount// - не совсем ясно какое среднее требуется ????
+                + "\nМедианное значение: " + intMedian + "\n---------------------------------------------------------\n");
     }
 
 

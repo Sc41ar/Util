@@ -35,9 +35,10 @@ public class ArgParser {
                     if (fileLines != null) {
                         filter.filterStringList(fileLines);
                     }
-
                 }
             }
         }
+        writer.writeFilteredData();
+        statRecorder.statOut();
     }
 }
