@@ -6,6 +6,12 @@ public class StatRecorder {
     private int floatCount;
     private int stringCount;
 
+    private final Writer writer;
+
+    public StatRecorder(Writer writer) {
+        this.writer = writer;
+    }
+
 
     //? TODO
     /*public void addIntegerCount(int count) {

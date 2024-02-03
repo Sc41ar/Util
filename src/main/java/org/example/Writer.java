@@ -9,8 +9,8 @@ import java.util.List;
 public class Writer {
 
     //А может есть смысл сохранять все в строках?
-    public List<String> integerList;
-    public List<String> doubleList;
+    public List<Integer> integerList;
+    public List<Double> doubleList;
     public List<String> stringList;
     private String prefix;
     private String resultsPath;

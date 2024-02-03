@@ -1,10 +1,15 @@
 package org.example;
 
+import java.io.FileWriter;
+import java.io.IOException;
+
 public class ArgParser {
     private final Writer writer;
+    private FileOpener fileOpener;
 
     public ArgParser() {
         writer = new Writer();
+        fileOpener = new FileOpener();
     }
 
     public void parseArgsArray(String[] args) {
@@ -23,7 +28,14 @@ public class ArgParser {
                         break;
                     }
                 }
-                default -> throw new IllegalStateException("Unexpected value: " + args[i]);
+                default -> {
+                    var fileLines = fileOpener.readFileLines(args[i]);
+                    if (fileLines != null)
+                    {
+
+                    }
+
+                }
             }
         }
     }
