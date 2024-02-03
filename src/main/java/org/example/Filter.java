@@ -2,6 +2,7 @@ package org.example;
 
 import java.util.List;
 
+@SuppressWarnings("SpellCheckingInspection")
 public class Filter {
     private final Writer fileWriter;
     private final StatRecorder statRecorder;
@@ -25,6 +26,7 @@ public class Filter {
     //double/float, etc -> float
 //    int, short, byte, etc. -> Int
 //    other -> String
+    @SuppressWarnings("SpellCheckingInspection")
     public String stringTypeFilter(String originalSt) {
         if (originalSt.isBlank())
             return "Blank";
@@ -33,7 +35,7 @@ public class Filter {
             statRecorder.incrementIntegerCount();
             fileWriter.integerList.add(intgr);
             return "Int";
-        } catch (NumberFormatException e) {
+        } catch (NumberFormatException ignored) {
         }
         try {
             var dotsStr = originalSt.substring(0).replace(',', '.'); //Исключение проблем с локалью
@@ -43,7 +45,7 @@ public class Filter {
             statRecorder.incrementFloatCount();
             fileWriter.doubleList.add(dbl);
             return "Float";
-        } catch (NumberFormatException e) {
+        } catch (NumberFormatException ignored) {
         }
         statRecorder.incrementStringCount();
         fileWriter.stringList.add(originalSt);
