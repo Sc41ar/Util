@@ -25,24 +25,12 @@ public class Writer {
         fileAddFlag = false;
     }
 
-    public String getPrefix() {
-        return prefix;
-    }
-
     public void setPrefix(String prefix) {
         this.prefix = prefix;
     }
 
-    public boolean isFileAddFlag() {
-        return fileAddFlag;
-    }
-
     public void setFileAddFlag(boolean fileAddFlag) {
         this.fileAddFlag = fileAddFlag;
-    }
-
-    public String getResultsPath() {
-        return resultsPath;
     }
 
     public void setResultsPath(String resultsPath) {//проверка корректности заданного пути вывода
@@ -59,5 +47,36 @@ public class Writer {
         }
         this.resultsPath = resultsPath;
 
+    }
+
+    public void writeFilteredData() {
+        try {
+            if (!integerList.isEmpty()) {
+                String path = !resultsPath.isBlank() ? resultsPath + "\\" + prefix + "integers.txt" : prefix + "integers.txt";
+                FileWriter fw = new FileWriter(path, fileAddFlag);
+                for (var val : integerList) {
+                    fw.write(val + "\n");
+                }
+                fw.close();
+            }
+            if (!doubleList.isEmpty()) {
+                String path = !resultsPath.isBlank() ? resultsPath + "\\" + prefix + "doubles.txt" : prefix + "doubles.txt";
+                FileWriter fw = new FileWriter(path, fileAddFlag);
+                for (var val : doubleList) {
+                    fw.write(val + "\n");
+                }
+                fw.close();
+            }
+            if (!stringList.isEmpty()) {
+                String path = !resultsPath.isBlank() ? resultsPath + "\\" + prefix + "strings.txt" : prefix + "strings.txt";
+                FileWriter fw = new FileWriter(path);
+                for (var val : stringList) {
+                    fw.write(val + "\n");
+                }
+                fw.close();
+            }
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
     }
 }

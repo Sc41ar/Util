@@ -4,7 +4,12 @@ import java.util.List;
 
 public class Filter {
     private final Writer fileWriter;
-    private StatRecorder statRecorder;
+    private final StatRecorder statRecorder;
+
+    public Filter(Writer fileWriter, StatRecorder statRecorder) {
+        this.fileWriter = fileWriter;
+        this.statRecorder = statRecorder;
+    }
 
     public Filter(Writer fileWriter) {
         this.fileWriter = fileWriter;
@@ -15,6 +20,7 @@ public class Filter {
         for(var str: list){
             stringTypeFilter(str);
         }
+        fileWriter.writeFilteredData();
     }
 
     //double/float, etc -> float
@@ -29,7 +35,6 @@ public class Filter {
             fileWriter.integerList.add(intgr);
             return "Int";
         } catch (NumberFormatException e) {
-            System.out.println("Не целое");
         }
         try {
             var dotsStr = originalSt.substring(0).replace(',', '.'); //Исключение проблем с локалью

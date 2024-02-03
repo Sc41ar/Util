@@ -6,6 +6,8 @@ public class StatRecorder {
     private int floatCount;
     private int stringCount;
 
+    private boolean briefStatOutput = true;
+
     private final Writer writer;
 
     public StatRecorder(Writer writer) {
@@ -57,5 +59,13 @@ public class StatRecorder {
 
     public void setFloatCount(int floatCount) {
         this.floatCount = floatCount;
+    }
+
+    public boolean isBriefStatOutput() {
+        return briefStatOutput;
+    }
+
+    public void setBriefStatOutput(boolean briefStatOutput) {
+        this.briefStatOutput = briefStatOutput;
     }
 }
