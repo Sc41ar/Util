@@ -9,7 +9,7 @@ import java.util.List;
 public class Writer {
 
     //А может есть смысл сохранять все в строках?
-    public List<Integer> integerList;
+    public List<Long> integerList;
     public List<Double> doubleList;
     public List<String> stringList;
     private String prefix;

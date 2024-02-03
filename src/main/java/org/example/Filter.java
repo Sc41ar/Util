@@ -21,16 +21,17 @@ public class Filter {
             stringTypeFilter(str);
         }
         fileWriter.writeFilteredData();
+        statRecorder.statOut();
     }
 
     //double/float, etc -> float
-//    int, short, byte, etc -> Int
+//    int, short, byte, etc. -> Int
 //    other -> String
     public String stringTypeFilter(String originalSt) {
         if (originalSt.isBlank())
             return "Blank";
         try {
-            var intgr = Integer.parseInt(originalSt);
+            var intgr = Long.parseLong(originalSt);
             statRecorder.incrementIntegerCount();
             fileWriter.integerList.add(intgr);
             return "Int";
@@ -45,7 +46,6 @@ public class Filter {
             fileWriter.doubleList.add(dbl);
             return "Float";
         } catch (NumberFormatException e) {
-            System.out.println("Не с плавающей");
         }
         statRecorder.incrementStringCount();
         fileWriter.stringList.add(originalSt);
