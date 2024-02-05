@@ -2,7 +2,6 @@ package org.example;
 
 import java.util.List;
 
-@SuppressWarnings("SpellCheckingInspection")
 public class Filter {
     private final Writer fileWriter;
     private final StatRecorder statRecorder;
@@ -26,7 +25,7 @@ public class Filter {
     //double/float, etc -> float
 //    int, short, byte, etc. -> Int
 //    other -> String
-    @SuppressWarnings("SpellCheckingInspection")
+    // возвращаемое значение необходимо для тестов
     public String stringTypeFilter(String originalSt) {
         if (originalSt.isBlank())
             return "Blank";
@@ -40,7 +39,6 @@ public class Filter {
         try {
             var dotsStr = originalSt.substring(0).replace(',', '.'); //Исключение проблем с локалью
             //для сохранения корректности исходной строки делаем сохраняем это в другую строку
-            //TODO дабл чек целесообразности этого потом
             var dbl = Double.parseDouble(dotsStr);
             statRecorder.incrementFloatCount();
             fileWriter.doubleList.add(dbl);
